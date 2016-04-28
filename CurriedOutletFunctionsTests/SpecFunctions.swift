@@ -33,7 +33,7 @@ typealias CurriedOutletTest = (UIViewController) -> (String -> AnyObject?)
 typealias CurriedButtonTest = (UIViewController) -> (AnyClass -> (String -> AnyObject?))
 
 // MARK: - Outlets
-func outlet(viewController: UIViewController)(_ outlet: String) -> AnyObject? {
+private func outlet(viewController: UIViewController)(_ outlet: String) -> AnyObject? {
     guard let object = viewController.valueForKey(outlet)
         else { fail("\(outlet) outlet was nil"); return nil }
 
