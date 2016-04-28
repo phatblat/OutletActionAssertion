@@ -16,6 +16,18 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KlL-Il-JC4">
+                                <rect key="frame" x="127" y="110" width="121" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlValueDidChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="thB-9a-6Zh"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="CMP-Lr-1Ec">
@@ -33,6 +45,7 @@
                     <connections>
                         <outlet property="leftButton" destination="E28-LX-iue" id="kdg-Th-zco"/>
                         <outlet property="rightButton" destination="Scc-zP-6aq" id="YyH-0x-wun"/>
+                        <outlet property="segmentedControl" destination="KlL-Il-JC4" id="GsK-z5-QXa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

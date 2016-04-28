@@ -17,24 +17,31 @@ class ViewControllerSpec: QuickSpec {
         var viewController: UIViewController = ViewController()
 
         var hasButtonOutlet: CurriedOutletTest!
+        var hasSegmentedControlOutlet: CurriedOutletTest!
         var receivesAction: CurriedActionTest!
-
-        beforeEach {
-            viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ViewController")
-            viewController.loadView()
-            expect(viewController.view).toNot(beNil())
-
-            hasButtonOutlet = outlet(viewController)(type: UIBarButtonItem.self)
-            receivesAction = action(viewController)(type: UIBarButtonItem.self)
-        }
+        var receivesSegmentedControlAction: CurriedActionTest!
 
         describe("view controller") {
+            beforeEach {
+                viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ViewController")
+                viewController.loadView()
+                expect(viewController.view).toNot(beNil())
+
+                hasButtonOutlet = outlet(viewController)(type: UIBarButtonItem.self)
+                hasSegmentedControlOutlet = outlet(viewController)(type: UISegmentedControl.self)
+                receivesAction = action(viewController)(type: UIBarButtonItem.self)
+                receivesSegmentedControlAction = action(viewController)(type: UISegmentedControl.self)
+            }
+
             // MARK: - Outlets
             it("has a leftButton outlet") {
                 hasButtonOutlet("leftButton")
             }
             it("has a rightButton outlet") {
                 hasButtonOutlet("rightButton")
+            }
+            it("has a segmentedControl outlet") {
+                hasSegmentedControlOutlet("segmentedControl")
             }
 
             // MARK: - Actions
@@ -43,6 +50,9 @@ class ViewControllerSpec: QuickSpec {
             }
             it("receives a didTapRightButton: action from rightButton") {
                 receivesAction("didTapRightButton:", from: "rightButton")
+            }
+            it("receives a didTapRightButton: action from rightButton") {
+                receivesSegmentedControlAction("segmentedControlValueDidChange:", from: "segmentedControl")
             }
         }
     }

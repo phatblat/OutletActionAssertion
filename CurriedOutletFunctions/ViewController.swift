@@ -11,15 +11,20 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet var leftButton: UIBarButtonItem!
     @IBOutlet var rightButton: UIBarButtonItem!
+    @IBOutlet var segmentedControl: UISegmentedControl!
 }
 
 // MARK: - IBAction Methods
 extension ViewController {
     @IBAction func didTapLeftButton(button: UIBarButtonItem) {
-        print("didTapLeftButton")
+        print("didTapLeftButton:")
     }
 
     @IBAction func didTapRightButton(button: UIBarButtonItem) {
-        print("didTapRightButton")
+        print("didTapRightButton:")
+    }
+
+    @IBAction func segmentedControlValueDidChange(segmentedControl: UISegmentedControl) {
+        print("segmentedControlValueDidChange:")
     }
 }
