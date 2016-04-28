@@ -56,7 +56,7 @@ func outlet<T>(viewController: UIViewController)(type: T.Type)(_ expectedOutlet:
 func action<T>(viewController: UIViewController)(type: T.Type)
     (_ expectedAction: String, from expectedOutlet: String) {
 
-    let optionalControl = outlet(viewController)(expectedOutlet)
+    let optionalControl = outlet(viewController)(type: type)(expectedOutlet)
 
     var target: AnyObject?
     var action: String?
