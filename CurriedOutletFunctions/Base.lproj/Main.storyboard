@@ -19,9 +19,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="CMP-Lr-1Ec">
-                        <barButtonItem key="leftBarButtonItem" title="Left" id="E28-LX-iue"/>
-                        <barButtonItem key="rightBarButtonItem" title="Right" id="Scc-zP-6aq"/>
+                        <barButtonItem key="leftBarButtonItem" title="Left" id="E28-LX-iue">
+                            <connections>
+                                <action selector="didTapLeftButton:" destination="BYZ-38-t0r" id="Cu9-hW-WPn"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Right" id="Scc-zP-6aq">
+                            <connections>
+                                <action selector="didTapRightButton:" destination="BYZ-38-t0r" id="0P9-Va-bP5"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="leftButton" destination="E28-LX-iue" id="kdg-Th-zco"/>
+                        <outlet property="rightButton" destination="Scc-zP-6aq" id="YyH-0x-wun"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
