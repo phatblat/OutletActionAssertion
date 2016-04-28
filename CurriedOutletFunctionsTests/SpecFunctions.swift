@@ -28,11 +28,10 @@ import Quick
 import Nimble
 import UIKit
 
-typealias ButtonTest = String -> AnyObject?
-typealias CurriedOutletTest = (UIViewController) -> (String -> AnyObject?)
-typealias CurriedButtonTest = (UIViewController) -> (AnyClass -> (String -> AnyObject?))
-
 // MARK: - Outlets
+typealias FullCurriedOutletTest = (UIViewController) -> (AnyClass.Type -> (String -> AnyObject?))
+typealias CurriedOutletTest = (String -> AnyObject?)
+
 private func outlet(viewController: UIViewController)(_ outlet: String) -> AnyObject? {
     guard let object = viewController.valueForKey(outlet)
         else { fail("\(outlet) outlet was nil"); return nil }
@@ -53,6 +52,9 @@ func outlet<T>(viewController: UIViewController)(type: T.Type)(_ expectedOutlet:
 }
 
 // MARK: - Actions
+typealias FullCurriedActionTest = (UIViewController) -> (AnyClass.Type -> ((String, from: String) -> Void))
+typealias CurriedActionTest = (String, from: String) -> Void
+
 func action<T>(viewController: UIViewController)(type: T.Type)
     (_ expectedAction: String, from expectedOutlet: String) {
 

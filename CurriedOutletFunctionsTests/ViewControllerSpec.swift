@@ -16,8 +16,8 @@ class ViewControllerSpec: QuickSpec {
         // Also needs to be initialized before passing to curried helper functions.
         var viewController: UIViewController = ViewController()
 
-        var hasButtonOutlet = outlet(viewController)(type: UIBarButtonItem.self)
-        var receivesAction = action(viewController)(type: UIBarButtonItem.self)
+        var hasButtonOutlet: CurriedOutletTest!
+        var receivesAction: CurriedActionTest!
 
         beforeEach {
             viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ViewController")
