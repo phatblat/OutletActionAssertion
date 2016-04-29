@@ -133,7 +133,7 @@ func action(viewController: UIViewController) -> (String, from: String) -> Void 
                 }
 
                 // Filter down to the expected action
-                action = allActions.filter({$0 == expectedAction}).first!
+                action = allActions.filter({$0 == expectedAction}).first
             default:
                 fail("Unhandled control type: \(control.dynamicType)")
             }
