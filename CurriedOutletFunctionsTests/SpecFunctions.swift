@@ -29,7 +29,7 @@ import Nimble
 import UIKit
 
 // MARK: - Outlets
-typealias FullCurriedOutletTest = (UIViewController) -> (String -> AnyObject?)
+typealias FullCurriedOutletTest = (UIViewController) -> (String) -> AnyObject?
 typealias CurriedOutletTest = String -> AnyObject?
 typealias CurriedButtonTest = String -> UIButton?
 typealias CurriedBarButtonItemTest = String -> UIBarButtonItem?
@@ -37,59 +37,63 @@ typealias CurriedSegmentedControlTest = String -> UISegmentedControl?
 typealias CurriedLabelTest = String -> UILabel?
 typealias CurriedImageTest = String -> UIImageView?
 
-private func outlet(viewController: UIViewController)(_ outlet: String) -> AnyObject? {
-    guard let object = viewController.valueForKey(outlet)
-        else { fail("\(outlet) outlet was nil"); return nil }
+private func outlet(viewController: UIViewController) -> (String) -> AnyObject? {
+    return { (outlet: String) -> AnyObject? in
+        guard let object = viewController.valueForKey(outlet)
+            else { fail("\(outlet) outlet was nil"); return nil }
 
-    return object
+        return object
+    }
 }
 
-func outlet<T>(viewController: UIViewController)(_ expectedOutlet: String) -> T? {
-    guard let object = outlet(viewController)(expectedOutlet)
-        else { return nil }
+func outlet<T>(viewController: UIViewController) -> (String) -> T? {
+    return { (expectedOutlet: String) -> T? in
+        guard let object = outlet(viewController)(expectedOutlet)
+            else { return nil }
 
-    debugPrint(object.dynamicType)
+        debugPrint(object.dynamicType)
 
-    guard let objectOfType = object as? T
-        else { fail("\(object) outlet was not a \(T.self)"); return nil }
+        guard let objectOfType = object as? T
+            else { fail("\(object) outlet was not a \(T.self)"); return nil }
 
-    return objectOfType
+        return objectOfType
+    }
 }
 
 // MARK: - Actions
-typealias FullCurriedActionTest = (UIViewController) -> ((String, from: String) -> Void)
+typealias FullCurriedActionTest = (UIViewController) -> (String, from: String) -> Void
 typealias CurriedActionTest = (String, from: String) -> Void
 
-func action(viewController: UIViewController)
-    (_ expectedAction: String, from expectedOutlet: String) {
+func action(viewController: UIViewController) -> (String, from: String) -> Void {
+    return { (expectedAction: String, expectedOutlet: String) in
+        let optionalControl = outlet(viewController)(expectedOutlet)
 
-    let optionalControl = outlet(viewController)(expectedOutlet)
+        var target: AnyObject?
+        var action: String?
 
-    var target: AnyObject?
-    var action: String?
+        if let control = optionalControl {
+            switch control {
+            case let button as UIBarButtonItem:
+                target = button.target
+                action = button.action.description
+            case let control as UIControl:
+                target = control.allTargets().first!
+                var allActions: [String] = []
+                for event: UIControlEvents in [.TouchUpInside, .ValueChanged] {
+                    allActions += control.actionsForTarget(target!, forControlEvent: event) ?? []
+                }
 
-    if let control = optionalControl {
-        switch control {
-        case let button as UIBarButtonItem:
-            target = button.target
-            action = button.action.description
-        case let control as UIControl:
-            target = control.allTargets().first!
-            var allActions: [String] = []
-            for event: UIControlEvents in [.TouchUpInside, .ValueChanged] {
-                allActions += control.actionsForTarget(target!, forControlEvent: event) ?? []
+                // Filter down to the expected action
+                action = allActions.filter({$0 == expectedAction}).first!
+            default:
+                fail("Unhandled control type: \(control.dynamicType)")
             }
-
-            // Filter down to the expected action
-            action = allActions.filter({$0 == expectedAction}).first!
-        default:
-            fail("Unhandled control type: \(control.dynamicType)")
         }
-    }
 
-    expect(target) === viewController
-    expect(action).toNot(beNil())
-    if let action = action {
-        expect(action) == expectedAction
+        expect(target) === viewController
+        expect(action).toNot(beNil())
+        if let action = action {
+            expect(action) == expectedAction
+        }
     }
 }
