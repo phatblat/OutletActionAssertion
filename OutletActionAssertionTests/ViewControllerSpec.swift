@@ -48,7 +48,7 @@ class ViewControllerSpec: QuickSpec {
             it("receives a didTapRightButton: action from rightButton") {
                 receivesAction("didTapRightButton:", from: "rightButton")
             }
-            it("receives a didTapRightButton: action from rightButton") {
+            it("receives a segmentedControlValueDidChange: action from segmentedControl") {
                 receivesAction("segmentedControlValueDidChange:", from: "segmentedControl")
             }
         }
