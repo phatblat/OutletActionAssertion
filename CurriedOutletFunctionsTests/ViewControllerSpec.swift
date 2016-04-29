@@ -14,9 +14,9 @@ class ViewControllerSpec: QuickSpec {
     override func spec() {
         var viewController: UIViewController!
 
-        var hasBarButtonItemOutlet: CurriedBarButtonItemTest!
-        var hasSegmentedControlOutlet: CurriedSegmentedControlTest!
-        var receivesAction: CurriedActionTest!
+        var hasBarButtonItemOutlet: BarButtonItemOutletAssertion!
+        var hasSegmentedControlOutlet: SegmentedControlOutletAssertion!
+        var receivesAction: ActionAssertion!
 
         describe("view controller") {
             beforeEach {

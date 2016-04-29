@@ -30,25 +30,25 @@ import UIKit
 
 // MARK: - Outlets
 /// Full signature of the `outlet` curried function.
-private typealias FullCurriedOutletTest = (UIViewController) -> (String) -> AnyObject?
+private typealias FullOutletTest = (UIViewController) -> (String) -> AnyObject?
 
 /// Asserts that the named outlet is bound, but does not care about the type of object.
-typealias CurriedOutletTest = String -> AnyObject?
+typealias AnyOutletAssertion = String -> AnyObject?
 
 /// Asserts that the named outlet is bound to a `UIButton`.
-typealias CurriedButtonTest = String -> UIButton?
+typealias ButtonOutletAssertion = String -> UIButton?
 
 /// Asserts that the named outlet is bound to a `UIBarButtonItem`.
-typealias CurriedBarButtonItemTest = String -> UIBarButtonItem?
+typealias BarButtonItemOutletAssertion = String -> UIBarButtonItem?
 
 /// Asserts that the named outlet is bound to a `UISegmentedControl`.
-typealias CurriedSegmentedControlTest = String -> UISegmentedControl?
+typealias SegmentedControlOutletAssertion = String -> UISegmentedControl?
 
 /// Asserts that the named outlet is bound to a `UILabel`.
-typealias CurriedLabelTest = String -> UILabel?
+typealias LabelOutletAssertion = String -> UILabel?
 
 /// Asserts that the named outlet is bound to a `UIImageView`.
-typealias CurriedImageTest = String -> UIImageView?
+typealias ImageOutletAssertion = String -> UIImageView?
 
 /// Asserts that `viewController` has an outlet with matching name. The Nimble
 /// `fail` function is called if outlet is not found.
@@ -95,10 +95,10 @@ func outlet<T>(viewController: UIViewController) -> (String) -> T? {
 
 // MARK: - Actions
 /// Full signature of the `action` curried function.
-typealias FullCurriedActionTest = (UIViewController) -> (String, from: String) -> Void
+typealias FullActionAssertion = (UIViewController) -> (String, from: String) -> Void
 
 /// Asserts that the  `from` outlet.
-typealias CurriedActionTest = (String, from: String) -> Void
+typealias ActionAssertion = (String, from: String) -> Void
 
 /// Asserts that `viewController` contains an action invoked from a known outlet.
 /// The Nimble `expect` function is used for validation and `fail` is called if
