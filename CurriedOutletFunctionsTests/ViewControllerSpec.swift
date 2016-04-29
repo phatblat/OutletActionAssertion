@@ -24,6 +24,7 @@ class ViewControllerSpec: QuickSpec {
                 viewController.loadView()
                 expect(viewController.view).toNot(beNil())
 
+                // Capture the new viewController instance for each test
                 hasBarButtonItemOutlet = outlet(viewController)
                 hasSegmentedControlOutlet = outlet(viewController)
                 receivesAction = action(viewController)
