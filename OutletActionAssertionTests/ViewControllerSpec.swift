@@ -1,12 +1,12 @@
 //
 //  ViewControllerSpec.swift
-//  CurriedOutletFunctions
+//  OutletActionAssertion
 //
 //  Created by Ben Chatelain on 4/27/16.
 //  Copyright © 2016 Ben Chatelain. All rights reserved.
 //
 
-@testable import CurriedOutletFunctions
+@testable import OutletActionAssertion
 import Quick
 import Nimble
 
