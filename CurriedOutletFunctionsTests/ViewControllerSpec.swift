@@ -12,9 +12,7 @@ import Nimble
 
 class ViewControllerSpec: QuickSpec {
     override func spec() {
-        // Start with an empty object so property can be non-optional
-        // Also needs to be initialized before passing to curried helper functions.
-        var viewController: UIViewController = ViewController()
+        var viewController: UIViewController!
 
         var hasBarButtonItemOutlet: CurriedBarButtonItemTest!
         var hasSegmentedControlOutlet: CurriedSegmentedControlTest!
