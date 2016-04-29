@@ -29,8 +29,13 @@ import Nimble
 import UIKit
 
 // MARK: - Outlets
-typealias FullCurriedOutletTest = (UIViewController) -> (AnyClass.Type -> (String -> AnyObject?))
-typealias CurriedOutletTest = (String -> AnyObject?)
+typealias FullCurriedOutletTest = (UIViewController) -> (String -> AnyObject?)
+typealias CurriedOutletTest = String -> AnyObject?
+typealias CurriedButtonTest = String -> UIButton?
+typealias CurriedBarButtonItemTest = String -> UIBarButtonItem?
+typealias CurriedSegmentedControlTest = String -> UISegmentedControl?
+typealias CurriedLabelTest = String -> UILabel?
+typealias CurriedImageTest = String -> UIImageView?
 
 private func outlet(viewController: UIViewController)(_ outlet: String) -> AnyObject? {
     guard let object = viewController.valueForKey(outlet)
@@ -39,26 +44,26 @@ private func outlet(viewController: UIViewController)(_ outlet: String) -> AnyOb
     return object
 }
 
-func outlet<T>(viewController: UIViewController)(type: T.Type)(_ expectedOutlet: String) -> T? {
+func outlet<T>(viewController: UIViewController)(_ expectedOutlet: String) -> T? {
     guard let object = outlet(viewController)(expectedOutlet)
         else { return nil }
 
     debugPrint(object.dynamicType)
 
     guard let objectOfType = object as? T
-        else { fail("\(object) outlet was not a \(type)"); return nil }
+        else { fail("\(object) outlet was not a \(T.self)"); return nil }
 
     return objectOfType
 }
 
 // MARK: - Actions
-typealias FullCurriedActionTest = (UIViewController) -> (AnyClass.Type -> ((String, from: String) -> Void))
+typealias FullCurriedActionTest = (UIViewController) -> ((String, from: String) -> Void)
 typealias CurriedActionTest = (String, from: String) -> Void
 
-func action<T>(viewController: UIViewController)(type: T.Type)
+func action(viewController: UIViewController)
     (_ expectedAction: String, from expectedOutlet: String) {
 
-    let optionalControl = outlet(viewController)(type: type)(expectedOutlet)
+    let optionalControl = outlet(viewController)(expectedOutlet)
 
     var target: AnyObject?
     var action: String?

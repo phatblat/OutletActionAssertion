@@ -16,10 +16,9 @@ class ViewControllerSpec: QuickSpec {
         // Also needs to be initialized before passing to curried helper functions.
         var viewController: UIViewController = ViewController()
 
-        var hasButtonOutlet: CurriedOutletTest!
-        var hasSegmentedControlOutlet: CurriedOutletTest!
+        var hasBarButtonItemOutlet: CurriedBarButtonItemTest!
+        var hasSegmentedControlOutlet: CurriedSegmentedControlTest!
         var receivesAction: CurriedActionTest!
-        var receivesSegmentedControlAction: CurriedActionTest!
 
         describe("view controller") {
             beforeEach {
@@ -27,18 +26,17 @@ class ViewControllerSpec: QuickSpec {
                 viewController.loadView()
                 expect(viewController.view).toNot(beNil())
 
-                hasButtonOutlet = outlet(viewController)(type: UIBarButtonItem.self)
-                hasSegmentedControlOutlet = outlet(viewController)(type: UISegmentedControl.self)
-                receivesAction = action(viewController)(type: UIBarButtonItem.self)
-                receivesSegmentedControlAction = action(viewController)(type: UISegmentedControl.self)
+                hasBarButtonItemOutlet = outlet(viewController)
+                hasSegmentedControlOutlet = outlet(viewController)
+                receivesAction = action(viewController)
             }
 
             // MARK: - Outlets
             it("has a leftButton outlet") {
-                hasButtonOutlet("leftButton")
+                hasBarButtonItemOutlet("leftButton")
             }
             it("has a rightButton outlet") {
-                hasButtonOutlet("rightButton")
+                hasBarButtonItemOutlet("rightButton")
             }
             it("has a segmentedControl outlet") {
                 hasSegmentedControlOutlet("segmentedControl")
@@ -52,7 +50,7 @@ class ViewControllerSpec: QuickSpec {
                 receivesAction("didTapRightButton:", from: "rightButton")
             }
             it("receives a didTapRightButton: action from rightButton") {
-                receivesSegmentedControlAction("segmentedControlValueDidChange:", from: "segmentedControl")
+                receivesAction("segmentedControlValueDidChange:", from: "segmentedControl")
             }
         }
     }
