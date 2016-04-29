@@ -1,4 +1,4 @@
-# Curried Outlet Testing Functions
+# IBOutlet and IBAction Assertion
 
 An example of testing IBOutlets and IBActions with curried functions in Swift 2.2.
 
