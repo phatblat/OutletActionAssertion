@@ -2,6 +2,8 @@
 
 An example of testing IBOutlets and IBActions with curried functions in Swift 2.2.
 
+Head on over to the accompanying [reflog post](http://phatbl.at/2016/04/29/testing-iboutlets-and-ibactions-with-curried-functions-in-swift.html) for an explanation of this project.
+
 ## Setup
 
 The `OutletActionAssertionTests` project uses the [Quick](https://github.com/Quick/Quick) and [Nimble](https://github.com/Quick/Nimble) frameworks installed through [CocoaPods](https://github.com/Quick/Nimble) 0.39. The `Pods` folder is not checked in so you will need to run the `pod install` command after cloning this repo before the
